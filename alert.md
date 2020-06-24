@@ -7,15 +7,15 @@ In questa guida, vorrei mostrare come è possibile monitorare il nodo usando l'e
 Esegui Node Exporter sul server Near:
 
 ```
-sudo docker run -dit \ 
-    --restart always \ 
-    --volume / proc: / host / proc: ro \ 
-    --volume / sys: / host / sys: ro \ 
-    --volume /: / rootfs: ro \ 
-    --name node-exporter \ 
-    -p 9100: 9100 prom / node-exporter: latest \ 
-    --path.procfs = / host / proc \ 
-    --path.sysfs = / host / sys
+sudo docker run -dit \
+    --restart always \
+    --volume /proc:/host/proc:ro \
+    --volume /sys:/host/sys:ro \
+    --volume /:/rootfs:ro \
+    --name node-exporter \
+    -p 9100:9100 prom/node-exporter:latest \
+    --path.procfs=/host/proc \
+    --path.sysfs=/host/sys
 ```
 
 È necessario aprire la porta 9100 in modo che Prometheus possa raccogliere i dati del nostro nodo.
@@ -24,18 +24,18 @@ Esegui Near Exporter sul server Near:
 ```
 git clone https://github.com/masknetgoal634/near-prometheus-exporter 
 cd near-prometheus-exporter
-sudo docker build -t near-prometeo-esportatore.
+sudo docker build -t near-prometeo-esportatore .
 ```
 
 Esegui finestra mobile:
 
 ```
-sudo docker run -dit \ 
-    --restart always \ 
-    --name near-exporter \ 
-    --network = host \ 
-    -p 9333: 9333 \ 
-    near-prometheus-exporter: latest / dist / main -accountId <POOL_ID>
+sudo docker run -dit \
+    --restart always \
+    --name near-exporter \
+    --network=host \
+    -p 9333:9333 \
+    near-prometheus-exporter:latest /dist/main -accountId <POOL_ID>
  ```   
     
 <POOL_ID> : il pool che verrà monitorato
@@ -49,15 +49,15 @@ Dopo aver configurato il nostro server Near per raccogliere e inviare statistich
 Eseguire un aggiornamento del sistema e installare i pacchetti necessari:
 
 ```
-sudo apt-get update 
-sudo apt installa git docker.io -y
+sudo apt-get update
+sudo apt install git docker.io -y
 ```
 
 Cloniamo la cartella e seguiamo il percorso ecc:
 
 ```
-git clone https://github.com/masknetgoal634/near-prometheus-exporter 
-cd near-prometheus-exporter / etc
+git clone https://github.com/masknetgoal634/near-prometheus-exporter
+cd near-prometheus-exporter/etc
 ```
 
 Ora dobbiamo aprire il file prometheus / prometheus.yml e apportare modifiche sostituendo l'indirizzo IP del nostro server Near:
@@ -77,13 +77,13 @@ In caso contrario, Prometeo potrebbe non visualizzare il nostro database e gener
 Avvia Prometeo:
 
 ```
-sudo docker run -dti \ 
-    --restart always \ 
-    --volume $ (pwd) / prometheus: / etc / prometheus / \ 
-    --name prometheus \ 
-    --network = host \ 
-    -p 9090: 9090 prom / prometheus: latest \ 
-    - -config.file = / etc / prometheus / prometheus.yml
+sudo docker run -dti \
+    --restart always \
+    --volume $(pwd)/prometheus:/etc/prometheus/ \
+    --name prometheus \
+    --network=host \
+    -p 9090:9090 prom/prometheus:latest \
+    --config.file=/etc/prometheus/prometheus.yml
 ```
 
 Successivamente, dobbiamo configurare il nostro server SMTP per inviare notifiche:
@@ -116,16 +116,16 @@ Il nostro numero 1001
 Avvia Grafana ( sostituisci 1001 con il tuo ID! ):
 
 ```
-sudo chown -R 1001: 1001 grafana / * 
-sudo docker run -dit \ 
-    --restart always \ 
-    --volume $ (pwd) / grafana: / var / lib / grafana \ 
-    --volume $ (pwd) / grafana / provisioning: / etc / grafana / provisioning \ 
-    --volume $ (pwd) /grafana/custom.ini:/etc/grafana/grafana.ini \ 
-    --user 1001 \ 
-    --network = host \ 
-    --name grafana \ 
-    -p 3000: 3000 grafana / grafana
+sudo chown -R 1001:1001 grafana/*
+sudo docker run -dit \
+    --restart always \
+    --volume $(pwd)/grafana:/var/lib/grafana \
+    --volume $(pwd)/grafana/provisioning:/etc/grafana/provisioning \
+    --volume $(pwd)/grafana/custom.ini:/etc/grafana/grafana.ini \
+    --user 1001 \
+    --network=host \
+    --name grafana \
+    -p 3000:3000 grafana/grafana
 ```    
 Andiamo a Grafana su: http://localhost:3000, localhost cambiamo il monitoraggio del server all'indirizzo IP.
 
