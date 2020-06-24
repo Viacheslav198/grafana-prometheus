@@ -61,16 +61,16 @@ cd near-prometheus-exporter / etc
 ```
 
 Ora dobbiamo aprire il file prometheus / prometheus.yml e apportare modifiche sostituendo l'indirizzo IP del nostro server Near:
-
-sudo nano prometheus / prometheus.yml
-
+```
+sudo nano prometheus/prometheus.yml
+```
 <NODE_IP_ADDRESS> sostituisce con l'indirizzo IP del nostro nodo Near
 
 
 Dopo di che cambiamo l'URL con l'indirizzo IP del nostro server di monitoraggio, lasciamo la porta come prima
 
 ```
-sudo nano grafana / provisioning / datasources / all.yml
+sudo nano grafana/provisioning/datasources/all.yml
 ```
 
 In caso contrario, Prometeo potrebbe non visualizzare il nostro database e genererà un errore.
@@ -89,7 +89,7 @@ sudo docker run -dti \
 Successivamente, dobbiamo configurare il nostro server SMTP per inviare notifiche:
 
 ```
-sudo nano grafana / custom.ini
+sudo nano grafana/custom.ini
 ```
 
 Passiamo ai dati del nostro indirizzo email su Google:
@@ -127,6 +127,6 @@ sudo docker run -dit \
     --name grafana \ 
     -p 3000: 3000 grafana / grafana
 ```    
-Andiamo a Grafana su: http: // localhost: 3000, localhost cambiamo il monitoraggio del server all'indirizzo IP.
+Andiamo a Grafana su: http://localhost:3000, localhost cambiamo il monitoraggio del server all'indirizzo IP.
 
 Inserisci il nome utente admin password admin e imposta una nuova password
