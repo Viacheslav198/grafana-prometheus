@@ -91,10 +91,18 @@ sudo nano grafana / custom.ini
 ```
 
 Passiamo ai dati del nostro indirizzo email su Google:
-user = <your_gmail_address> , 
-password = <your_gmail_password> ,
-from_address = <your_gmail_address> 
-
+```
+[smtp]
+enabled = true
+host = smtp.gmail.com:587 
+user = <your_gmail_address>
+password = <your_gmail_password>
+;cert_file =
+;key_file =
+skip_verify = true
+from_address = <your_gmail_address>
+from_name = Grafana
+```
 Scopriamo l'ID utente con il quale siamo:
 
 ```
