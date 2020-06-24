@@ -1,4 +1,6 @@
-# Impostazione del server vicino
+# Monitoraggio nodi Grafana + Prometheus
+
+## Impostazione del server vicino
 
 In questa guida, vorrei mostrare come è possibile monitorare il nodo usando l'esempio del nodo Vicino
 
@@ -40,7 +42,7 @@ sudo docker run -dit \
 
 È necessario aprire la porta 3030 e la porta 9333 in modo che Prometheus possa raccogliere i dati del nostro nodo e inviarli al server.
 
-# Monitoraggio della configurazione del server
+## Monitoraggio della configurazione del server
 
 Dopo aver configurato il nostro server Near per raccogliere e inviare statistiche, dobbiamo configurare il server di monitoraggio stesso.
 
